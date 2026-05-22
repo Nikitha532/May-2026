@@ -1,0 +1,29 @@
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+
+        #breute force
+        '''
+        for i in range(len(nums)):
+            if target == nums[i]:
+                return i
+        return -1'''
+
+        #optimal with T.C O(log n)
+        n = len(nums)
+        low = 0
+        high = n-1
+        while low <= high :
+            mid = (low + high)//2
+            if target == nums[mid] :
+                return mid
+            if nums[low] <= nums[mid]:
+                if nums[low] <= target < nums[mid] :
+                    high = mid - 1
+                else :
+                    low = mid + 1
+            else :
+                if nums[mid] < target <= nums[high] :
+                    low = mid + 1
+                else :
+                    high = mid - 1
+        return -1
